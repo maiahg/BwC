@@ -104,6 +104,15 @@
     @apply text-[36px] leading-[44px];
   }
 
+  /* Landing Page */
+  .landing-page {
+    @apply no-scrollbar h-screen w-full bg-gradient-to-br from-white to-blue-50 overflow-hidden;
+  }
+
+  .landing-btn {
+    @apply text-2xl rounded-xl border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form hover:opacity-80 p-6;
+  }
+
   /* Home */
   .home {
     @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
@@ -292,7 +301,11 @@
   }
 
   .form-btn {
-    @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+    @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient text-white shadow-form hover:opacity-80;
+  }
+
+  .form-btn-secondary {
+    @apply text-16 rounded-lg border bg-white shadow-form hover:bg-gray-300;
   }
 
   .form-link {
