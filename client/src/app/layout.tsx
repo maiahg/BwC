@@ -11,8 +11,8 @@ const ibmPlexSerif = IBM_Plex_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "FinEase",
-  description: "FinEase - Manage your Finace with Ease.",
+  title: "BwC",
+  description: "BwC - Bank with Confidence.",
   icons: {
     icon: '/client/public/icons/logo.svg'
   }
@@ -28,7 +28,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${ibmPlexSerif.variable}`}>        
         <Providers>
         {children}
-        </Providers></body>
+        </Providers>
+      </body>
     </html>
   );
 }
