@@ -24,12 +24,12 @@ const MobileHeader = ({}) => {
           className="!w-screen !max-w-none !left-0 !top-0 !h-screen !rounded-none p-6 bg-white z-50"
         >
         <DropdownMenuItem>
-        <Button variant="outline" className="w-full py-6 form-btn-secondary" onClick={() => router.push('/sign-in')}>
+        <Button variant="outline" className="w-full py-6 form-btn-secondary" onClick={() => router.push('/signin')}>
             Sign In
         </Button>
         </DropdownMenuItem>
         <DropdownMenuItem>
-        <Button className="w-full py-6 form-btn" onClick={() => router.push('/sign-up')}>
+        <Button className="w-full py-6 form-btn" onClick={() => router.push('/signup')}>
             Sign Up
           </Button>
         </DropdownMenuItem>

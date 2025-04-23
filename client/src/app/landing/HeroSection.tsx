@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,7 +26,7 @@ const HeroSection = () => {
             Access & manage your finances with ease. <br />BwC provides a seamless banking experience with powerful tools and features.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <Button className="landing-btn" onClick={() => router.push('/sign-up')}>Get Started</Button>
+            <Button className="landing-btn" onClick={() => router.push('/signup')}>Get Started</Button>
           </div>
         </div>
         <div className={`relative transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>

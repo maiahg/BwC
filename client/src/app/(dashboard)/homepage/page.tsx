@@ -3,7 +3,7 @@ import HeaderBox from '@/components/HeaderBox'
 import TotalBalanceBox from '@/components/TotalBalanceBox'
 import RightSidebar from '@/components/RightSidebar'
 
-const Home = () => {
+const Homepage = () => {
   const loggedIn = { firstName : 'John', lastName: 'Doe', email: 'abc@gmail.com'} 
   return (
     <section className="home">
@@ -35,4 +35,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Homepage

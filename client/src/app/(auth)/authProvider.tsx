@@ -1,8 +1,14 @@
+"use client";
+
 import React from 'react';
 import { Amplify } from 'aws-amplify';
-
-import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+import {
+    Authenticator,
+    useAuthenticator,
+    View,
+  } from "@aws-amplify/ui-react";
 import '@aws-amplify/ui-react/styles.css';
+import { useRouter, usePathname } from "next/navigation";
 
 // https://docs.amplify.aws/gen1/react/tools/libraries/configure-categories/
 Amplify.configure({
@@ -15,31 +21,79 @@ Amplify.configure({
 }
 );
 
+const components = {
+    // TODO: Add a custom header
+    SignIn: {
+      Footer() {
+        const { toSignUp } = useAuthenticator();
+        return (
+          <View className="text-center mt-4">
+            <p>
+              Don&apos;t have an account?{" "}
+              <button
+                onClick={toSignUp}
+                className="text-blue-800 hover:underline bg-transparent border-none p-0"
+              >
+                Sign up here
+              </button>
+            </p>
+          </View>
+        );
+      },
+    },
+    SignUp: {
+      FormFields() {
+        const { validationErrors } = useAuthenticator();
+  
+        return (
+            <Authenticator.SignUp.FormFields />
+        );
+      },
+  
+      Footer() {
+        const { toSignIn } = useAuthenticator();
+        return (
+          <View className="text-center mt-4">
+            <p>
+              Already have an account?{" "}
+              <button
+                onClick={toSignIn}
+                className="text-blue-800 hover:underline bg-transparent border-none p-0"
+              >
+                Sign in
+              </button>
+            </p>
+          </View>
+        );
+      },
+    },
+  };
+
 const formFields = {
     signIn: {
-        email: {
+        username: {
+            order: 1,
             placeholder: "Enter your email",
             label: "Email",
             isRequired: true,
-        },
+          },
         password: {
+            order: 2,
             placeholder: "Enter your password",
             label: "Password",
             isRequired: true,
         },
     },
     signUp: {
-        firstName: {
+        name: {
             order: 1,
-            placeholder: "Enter your first name",
-            label: "First Name",
             isRequired: true,
         },
-        lastName: {
-            order: 2,
-            placeholder: "Enter your last name",
-            label: "Last Name",
-            isRequired: true,
+        username: {
+          order: 2,
+          placeholder: "Enter your email address",
+          label: "Email",
+          isRequired: true,
         },
         address: {
             order: 3,
@@ -47,44 +101,35 @@ const formFields = {
             label: "Address",
             isRequired: true,
         },
-        SIN : {
+        birthdate: {
             order: 4,
-            placeholder: "Enter your SIN",
-            label: "SIN",
-            isRequired: true,
-        },
-        dob: {
-            order: 5,
-            placeholder: "Enter your date of birth",
-            label: "Date of Birth",
-            isRequired: true,
-        },
-        email: {
-            order: 6,
-            placeholder: "Enter your email",
-            label: "Email",
             isRequired: true,
         },
         password: {
-            order: 7,
-            placeholder: "Enter your password",
-            label: "Password",
-            isRequired: true,
+          order: 5,
+          placeholder: "Create a password",
+          label: "Password",
+          isRequired: true,
         },
         confirm_password: {
-            order: 8,
-            placeholder: "Confirm your password",
-            label: "Confirm Password",
-            isRequired: true,
+          order: 6,
+          placeholder: "Confirm your password",
+          label: "Confirm Password",
+          isRequired: true,
         },
-    },
+      },
 }
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
-    const {user} = useAuthenticator((context) => [context.user]);
+    const pathname = usePathname();
+    const isAuthPage = pathname.match(/^\/(signin|signup)$/);
+    
   return (
-    <div>
-        <Authenticator>
+    <div className='min-h-screen flex items-center justify-center '>
+        <Authenticator
+        initialState={pathname.includes("signup") ? "signUp" : "signIn"}
+        components={components}
+        formFields={formFields}>
             {() => <>{children}</>}
         </Authenticator>
     </div>
