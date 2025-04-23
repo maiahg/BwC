@@ -1,0 +1,30 @@
+# dependencies
+**/node_modules/
+**/dist/
+client/node_modules/
+server/node_modules/
+node_modules
+
+# env files
+.env
+client/.env.local
+client/.env.development
+client/.env.production
+server/.env
+client/.env
+server/.env
+
+# dist
+client/dist/
+server/dist/
+
+# next.js
+client/.next/
+
+# misc
+.DS_Store
+.vscode/
+
+# typescript
+*.tsbuildinfo
+client/next-env.d.ts
