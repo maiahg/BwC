@@ -393,3 +393,71 @@
     @apply text-16 font-semibold text-black-2 max-xl:hidden;
   }
 }
+
+/* Amplify UI Overrides */
+[data-amplify-authenticator] {
+  --amplify-components-button-primary-background-color: #0179FE;
+  --amplify-components-button-primary-hover-background-color: #0166d8;
+  --amplify-components-button-border-radius: 0.5rem;
+  --amplify-components-fieldcontrol-border-radius: 0.5rem;
+}
+
+[data-amplify-authenticator][data-variation="default"] {
+  height: 100%;
+  padding: 2rem !important;
+}
+
+[data-amplify-authenticator] [data-amplify-router] {
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 400px !important;
+  margin: 0 auto;
+}
+
+[data-amplify-authenticator] [data-amplify-container] {
+  border-radius: 0.5rem;
+  padding: 2rem !important;
+  border: 1px solid hsl(214.3 31.8% 91.4%);
+}
+
+[data-amplify-authenticator] [data-amplify-form] {
+  padding: 0 !important;
+}
+
+[data-amplify-authenticator] .amplify-tabs__list {
+  display: none;
+}
+
+[data-amplify-authenticator] .amplify-button--primary {
+  width: 100%;
+  height: 2.75rem;
+  margin-top: 1rem;
+  background-color: #0179FE !important;
+  color: hsl(210 40% 98%) !important;
+  @apply font-medium;
+  @apply text-sm;
+}
+
+[data-amplify-authenticator] .amplify-button--primary:hover {
+  background-color: #0166d8 !important;
+}
+
+[data-amplify-authenticator] .amplify-field-group__control {
+  border-color: hsl(214.3 31.8% 88%);
+}
+
+[data-amplify-authenticator] .amplify-field-group__control:focus-within {
+  border-color: #0166d8 !important;
+  box-shadow: 0 0 0 1px #0166d8  !important;
+}
+
+[data-amplify-authenticator] .amplify-label {
+  @apply text-sm font-medium;
+  color: hsl(222.2 84% 4.9%);
+}
+
+[data-amplify-authenticator] .amplify-text--error {
+  color: #ff0000;
+}
+
+/* TODO: Customize Resend button, show password, date pickers */

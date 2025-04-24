@@ -2,12 +2,18 @@
 
 import { sidebarLinks } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { signOut } from 'aws-amplify/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Button } from './ui/button'
 
 const Sidebar = ({ user }: SiderbarProps) => {
   const pathname = usePathname();
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = '/';
+  }
 
   return (
     <section className="sidebar">
@@ -22,6 +28,8 @@ const Sidebar = ({ user }: SiderbarProps) => {
           />
           <h1 className="sidebar-logo">BwC</h1>
         </Link>
+
+        <Button className='form-btn' onClick={handleSignOut}>Sign Out</Button>
 
         {sidebarLinks.map((item) => {
           const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`)

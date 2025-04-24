@@ -8,7 +8,7 @@ const Landing = () => {
       <Header />
       <HeroSection />
     </div>
-  )
-}
+  );
+};
 
 export default Landing

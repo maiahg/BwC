@@ -3,8 +3,8 @@ import HeaderBox from '@/components/HeaderBox'
 import TotalBalanceBox from '@/components/TotalBalanceBox'
 import RightSidebar from '@/components/RightSidebar'
 
-const Home = () => {
-  const loggedIn = { firstName : 'John', lastName: 'Doe', email: 'abc@gmail.com'} 
+const Homepage = () => {
+  const loggedIn = { name: "Jane Doe", email: 'abc@gmail.com'} 
   return (
     <section className="home">
       <div className="home-content">
@@ -12,7 +12,7 @@ const Home = () => {
           <HeaderBox 
             type="greeting"
             title="Welcome"
-            user={loggedIn?.firstName || 'Guest'}
+            user={loggedIn?.name || 'Guest'}
             subtext="Access and manage your account and transactions with ease."
           />
         </header>
@@ -35,4 +35,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Homepage
