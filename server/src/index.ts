@@ -5,8 +5,10 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import { authMiddleware } from './middleware/authMiddleware';
 
 /* ROUTE IMPORT */
+import userRoutes from './routes/userRoutes';
 
 /* CONFIGURATION */
 dotenv.config();
@@ -21,8 +23,10 @@ app.use(cors());
 
 /* ROUTES */
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('This is landing page route');
 });
+
+app.use('/users', authMiddleware(), userRoutes);
 
 /* SERVER */
 const PORT = process.env.PORT || 8001;

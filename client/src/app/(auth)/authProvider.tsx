@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from "react";
 import { Amplify } from 'aws-amplify';
 import {
     Authenticator,
@@ -121,8 +121,18 @@ const formFields = {
 }
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
-    const pathname = usePathname();
-    const isAuthPage = pathname.match(/^\/(signin|signup)$/);
+    const { user } = useAuthenticator((context) => [context.user]);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const isAuthPage = pathname.match(/^\/(signin|signup)$/);
+
+    useEffect(() => {
+    if (user && isAuthPage) {
+      router.push("/");
+    }
+  }, [user, isAuthPage, router]);
+  
     
   return (
     <div className='min-h-screen flex items-center justify-center '>

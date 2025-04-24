@@ -59,20 +59,19 @@ export const withToast = async <T>(
 export const createNewUserInDatabase = async (
   user: any,
   idToken: any,
-  userRole: string,
   fetchWithBQ: any
 ) => {
-  const createEndpoint =
-    userRole?.toLowerCase() === "manager" ? "/managers" : "/tenants";
-
   const createUserResponse = await fetchWithBQ({
-    url: createEndpoint,
+    url: "/users",
     method: "POST",
     body: {
       cognitoId: user.userId,
-      name: user.username,
+      name: idToken?.payload?.name || "",
       email: idToken?.payload?.email || "",
-      phoneNumber: "",
+      address: idToken?.payload?.address || "",
+      dateOfBirth: idToken?.payload?.birthdate || "",
+      dwollaCustomerUrl: "",
+      dwollaCustomerId: "",
     },
   });
 
