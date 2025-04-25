@@ -14,7 +14,8 @@ declare global {
   type UserInfo = {
     _id: string;
     cognitoId: string;
-    name: string;
+    given_name: string;
+    family_name: string;
     dwollaCustomerUrl: string;
     dwollaCustomerId: string;
     email: string;
@@ -55,7 +56,7 @@ declare global {
   };
 
   type Bank = {
-    $id: string;
+    _id: string;
     accountId: string;
     bankId: string;
     accessToken: string;

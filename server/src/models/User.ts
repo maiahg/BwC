@@ -6,7 +6,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    name: {
+    given_name: {
+        type: String,
+        required: true,
+    },
+    family_name: {
         type: String,
         required: true,
     },
@@ -31,7 +35,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-})
+});
 
 const User = mongoose.model("User", UserSchema);
 export default User;

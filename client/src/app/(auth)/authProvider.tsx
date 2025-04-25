@@ -85,34 +85,38 @@ const formFields = {
         },
     },
     signUp: {
-        name: {
+        given_name: {
             order: 1,
             isRequired: true,
         },
+        family_name: {
+            order: 2,
+            isRequired: true,
+        },
         username: {
-          order: 2,
+          order: 3,
           placeholder: "Enter your email address",
           label: "Email",
           isRequired: true,
         },
         address: {
-            order: 3,
+            order: 4,
             placeholder: "Enter your address",
             label: "Address",
             isRequired: true,
         },
         birthdate: {
-            order: 4,
+            order: 5,
             isRequired: true,
         },
         password: {
-          order: 5,
+          order: 6,
           placeholder: "Create a password",
           label: "Password",
           isRequired: true,
         },
         confirm_password: {
-          order: 6,
+          order: 7,
           placeholder: "Confirm your password",
           label: "Confirm Password",
           isRequired: true,
