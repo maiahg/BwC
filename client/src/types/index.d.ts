@@ -12,8 +12,8 @@ declare global {
   };
 
   type UserInfo = {
-    $id: string;
-    userId: string;
+    _id: string;
+    cognitoId: string;
     name: string;
     dwollaCustomerUrl: string;
     dwollaCustomerId: string;

@@ -11,12 +11,11 @@ import { useRouter } from "next/navigation";
 const Dashboard = () => {
   const { data: authUser, isLoading} = useGetAuthUserQuery();
   const router = useRouter();
+  console.log(authUser);
 
-  useEffect(() => {
-    if (!authUser) {
-      router.push("/technical-error");
-    }
-  }, [authUser, router]);
+  if (!isLoading && (!authUser || !authUser.userInfo)) {
+    window.location.href = '/technical-error';
+  }
 
   if (isLoading) {
     return (

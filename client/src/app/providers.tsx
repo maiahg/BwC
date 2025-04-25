@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
-  const publicRoutes = ["/", "/landing", "/technical-error"];
+  const publicRoutes = ["/", "/technical-error"];
   const isPublicRoute = publicRoutes.includes(pathname);
 
   return (
