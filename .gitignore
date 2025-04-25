@@ -10,6 +10,7 @@ node_modules
 client/.env.local
 client/.env.development
 client/.env.production
+client/.env.sentry-build-plugin
 server/.env
 client/.env
 server/.env
