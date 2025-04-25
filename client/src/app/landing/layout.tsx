@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (authUser) {
-        router.push("/homepage");
+        router.push("/dashboard");
     }
   }, [authUser, router, pathname]);
 
