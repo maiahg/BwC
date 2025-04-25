@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '@/app/landing/Header'
-import HeroSection from '@/app/landing/HeroSection'
+import Header from './Header'
+import HeroSection from './HeroSection'
 
 const Landing = () => {
   return (
