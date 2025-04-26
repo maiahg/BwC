@@ -9,11 +9,11 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
-  const { data: authUser, isLoading} = useGetAuthUserQuery();
+  const { data: authUser, isLoading, error} = useGetAuthUserQuery();
   const router = useRouter();
   console.log(authUser);
 
-  if (!isLoading && (!authUser || !authUser.userInfo)) {
+  if (!isLoading && (!authUser || !authUser.userInfo || error)) {
     window.location.href = '/technical-error';
   }
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
           <HeaderBox 
             type="greeting"
             title="Welcome"
-            user={authUser?.userInfo.name || 'Guest'}
+            user={authUser?.userInfo.given_name || 'Guest'}
             subtext="Access and manage your account and transactions with ease."
           />
         </header>

@@ -66,7 +66,8 @@ export const createNewUserInDatabase = async (
     method: "POST",
     body: {
       cognitoId: user.userId,
-      name: idToken?.payload?.name || "",
+      given_name: idToken?.payload?.given_name || "",
+      family_name: idToken?.payload?.family_name || "",
       email: idToken?.payload?.email || "",
       address: idToken?.payload?.address || "",
       dateOfBirth: idToken?.payload?.birthdate || "",

@@ -3,13 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import PlaidLink from '@/components/PlaidLink';
+import { useGetAuthUserQuery } from '@/state/api'
+
 
 const LinkAccount = () => {
+  const { data: authUser, isLoading, error} = useGetAuthUserQuery();
   const router = useRouter();
-
-  const handleLinkAccount = () => {
-    console.log("Link Account button clicked");
-  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -24,12 +24,7 @@ const LinkAccount = () => {
       <p className="mb-6 text-center">
         Signed up successfully. Link your account to start banking with confidence.
       </p>
-      <button
-        onClick={handleLinkAccount}
-        className="px-6 py-3 form-btn"
-      >
-        Link Account
-      </button>
+      <PlaidLink user={authUser?.userInfo} variant="primary" />
     </div>
   );
 };

@@ -1,17 +1,22 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import { authMiddleware } from './middleware/authMiddleware';
+import { connectDB } from './lib/mongoose';
+
 
 /* ROUTE IMPORT */
 import userRoutes from './routes/userRoutes';
+import plaidRoutes from './routes/plaidRoutes';
 
 /* CONFIGURATION */
-dotenv.config();
+
 const app = express();
 app.use(express.json());
 app.use(helmet());
@@ -27,6 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', authMiddleware(), userRoutes);
+app.use('/plaid', authMiddleware(), plaidRoutes);
 
 /* SERVER */
 const PORT = process.env.PORT || 8001;
@@ -35,13 +41,8 @@ app.listen(PORT, () => {
 });
 
 /* MONGOOSE SETUP */
-mongoose
-  .connect(process.env.MONGO_URL!, {})
-  .then(async () => {
-    app.listen(PORT, () => {
-      console.log(`Server Port: ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.log(`${error} did not connect`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
   });
+});

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/User";
+import { createDwollaCustomer } from "../lib/dwolla";
 
 export const getUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -24,19 +25,43 @@ export const createUser = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { cognitoId, name, email, address, dateOfBirth } = req.body;
+    const { cognitoId, given_name, family_name, email, address, dateOfBirth } = req.body;
 
-    const user = new User({
-        cognitoId,
-        name,
-        email,
-        address: address.formatted,
-        dateOfBirth,
-        dwollaCustomerUrl: "",
-        dwollaCustomerId: "",
+    const dwollaCustomerUrl = await createDwollaCustomer({
+      firstName: given_name,
+      lastName: family_name,
+      email,
+      address: address.formatted,
+      dateOfBirth,
+      type: 'personal',
     });
 
-    await user.save();
+    if (!dwollaCustomerUrl) {
+      res.status(500).json({ message: "Error creating Dwolla customer" });
+      return;
+    }
+
+    const dwollaCustomerId = dwollaCustomerUrl.split("/").pop();
+
+    const user = new User({
+      cognitoId,
+      given_name,
+      family_name,
+      email,
+      address: address.formatted,
+      dateOfBirth,
+      dwollaCustomerUrl,
+      dwollaCustomerId,
+    });
+
+    try {
+      await user.save();
+    }
+    catch (error: any) {
+      res.status(500).json({ message: `Error saving user: ${error.message}` });
+      return;
+    }
+
     res.status(201).json(user);
 
   } catch (error: any) {
