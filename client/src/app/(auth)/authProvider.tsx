@@ -125,7 +125,7 @@ const formFields = {
 }
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuthenticator((context) => [context.user]);
+  const { user, route } = useAuthenticator((context) => [context.user, context.route]);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -133,9 +133,14 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (user && isAuthPage) {
-      router.push("/dashboard");
+      if (route === "signUp") {
+        router.push("/link-account");
+      } else {
+        router.push("/dashboard");
+      }
     }
-  }, [user, isAuthPage, router]);
+  }, [user, isAuthPage, route, router]);
+
   
   return (
     <div className='min-h-screen flex items-center justify-center '>

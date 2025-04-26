@@ -21,7 +21,6 @@ export const createLinkToken = async (req: Request, res: Response) => {
 
     res.json({ linkToken: response.data.link_token });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Could not create link token" });
   }
 };

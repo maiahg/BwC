@@ -57,7 +57,7 @@ export const api = createApi({
             url: "/plaid/create-link-token",
             method: "POST",
             body: {
-              cognitoId: userInfo.sub,
+              cognitoId: userInfo.cognitoId,
               given_name: userInfo.given_name,
               family_name: userInfo.family_name,
             },
@@ -75,7 +75,7 @@ export const api = createApi({
       }
     }),
 
-    exchangePublicToken: build.mutation<void, { _id: string; public_token: string }>({
+    exchangePublicToken: build.mutation<string, { _id: string; public_token: string }>({
       queryFn: async ({_id, public_token}, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
           const plaidExchangeResponse = await fetchWithBQ({
@@ -91,7 +91,7 @@ export const api = createApi({
             return { error: plaidExchangeResponse.error };
           }
 
-          return { data: void };
+          return { data: plaidExchangeResponse.data as string };
         } catch (error: any) {
           return { error: error.message || "Could not exchange public token" };
         }

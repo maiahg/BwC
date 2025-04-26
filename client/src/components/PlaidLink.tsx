@@ -8,53 +8,38 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter();
-  const [linkToken, setLinkToken] = useState<string | null>(null);
+  const [token, setToken] = useState('');
 
   const [createLinkToken, { data, isLoading, error }] = useCreateLinkTokenMutation();
   const [exchangePublicToken] = useExchangePublicTokenMutation();
 
-useEffect(() => {
+  useEffect(() => {
     const fetchLinkToken = async () => {
       try {
-        const response = await createLinkToken(user.userInfo).unwrap();
-        setLinkToken(response.link_token);
+        const response = await createLinkToken(user);
+        setToken(response?.data.linkToken);
       } catch (err) {
         console.error("Failed to create link token", err);
       }
     };
+    fetchLinkToken();
+  }, [user]);
 
-    if (user?.userInfo) {
-      fetchLinkToken();
-    }
-  }, [user, createLinkToken]);
+  const onSuccess = useCallback<PlaidLinkOnSuccess>(async (public_token: string) => {
+    await exchangePublicToken({
+      _id: user._id,
+      public_token,
+    })
 
-  // Called when Plaid Link is successful
-  const onSuccess = useCallback<PlaidLinkOnSuccess>(
-    async (public_token: string) => {
-      try {
-        await exchangePublicToken({
-          _id: user.userInfo.$id,
-          public_token,
-        }).unwrap();
-        router.push('/dashboard');
-      } catch (err) {
-        console.error("Failed to exchange public token", err);
-        router.push('/technical-error');
-      }
-    },
-    [user, exchangePublicToken, router]
-  );
+    router.push('/dashboard');
+  }, [user, router])
 
   const config: PlaidLinkOptions = {
-    token: linkToken || '', // Plaid needs empty string if not ready
+    token,
     onSuccess,
   };
 
   const { open, ready } = usePlaidLink(config);
-  
-    if (!isLoading && (!data || !data.linkToken || error)) {
-      window.location.href = '/technical-error';
-    }
   
     if (isLoading) {
       return (
