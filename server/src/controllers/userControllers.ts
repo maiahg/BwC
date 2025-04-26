@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/User";
-// import { creatDwollaCustomer } from "../lib/dwolla";
+import { createDwollaCustomer } from "../lib/dwolla";
 
 export const getUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -27,8 +27,7 @@ export const createUser = async (
   try {
     const { cognitoId, given_name, family_name, email, address, dateOfBirth } = req.body;
 
-    /*
-        const dwollaCustomerUrl = await creatDwollaCustomer({
+    const dwollaCustomerUrl = await createDwollaCustomer({
       firstName: given_name,
       lastName: family_name,
       email,
@@ -43,7 +42,6 @@ export const createUser = async (
     }
 
     const dwollaCustomerId = dwollaCustomerUrl.split("/").pop();
-    */
 
     const user = new User({
       cognitoId,
@@ -52,8 +50,8 @@ export const createUser = async (
       email,
       address: address.formatted,
       dateOfBirth,
-      dwollaCustomerUrl: "",
-      dwollaCustomerId: "",
+      dwollaCustomerUrl,
+      dwollaCustomerId,
     });
 
     try {
