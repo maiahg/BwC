@@ -66,13 +66,7 @@ export const createNewUserInDatabase = async (
     method: "POST",
     body: {
       cognitoId: user.userId,
-      given_name: idToken?.payload?.given_name || "",
-      family_name: idToken?.payload?.family_name || "",
       email: idToken?.payload?.email || "",
-      address: idToken?.payload?.address || "",
-      dateOfBirth: idToken?.payload?.birthdate || "",
-      dwollaCustomerUrl: "",
-      dwollaCustomerId: "",
     },
   });
 
@@ -81,6 +75,24 @@ export const createNewUserInDatabase = async (
   }
 
   return createUserResponse;
+};
+
+export const updateUserInDatabase = async (
+  cognitoId: string,
+  userInfo: UserInfo,
+  fetchWithBQ: any
+) => {
+  const updateUserResponse = await fetchWithBQ({
+    url: `/users/${cognitoId}`,
+    method: "PUT",
+    body: userInfo,
+  });
+
+  if (updateUserResponse.error) {
+    throw new Error("Failed to update user record");
+  }
+
+  return updateUserResponse;
 };
 
 export function formatAmount(amount: number): string {

@@ -7,8 +7,15 @@ import User from '../models/User';
 import Bank from '../models/Bank';
 
 
-export const createLinkToken = async (req: Request, res: Response) => {
-  const { cognitoId, given_name, family_name } = req.body;
+export const createLinkToken = async (req: Request, res: Response): Promise<void> => {
+  const { cognitoId } = req.body;
+  const user = await User.findOne({ cognitoId });
+  if (!user) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  } 
+
+  const { given_name, family_name } = user;
 
   try {
     const response = await plaidClient.linkTokenCreate({
@@ -25,7 +32,7 @@ export const createLinkToken = async (req: Request, res: Response) => {
   }
 };
 
-export const exchangePublicToken = async (req: Request, res: Response) => {
+export const exchangePublicToken = async (req: Request, res: Response): Promise<void> => {
   const { _id, public_token } = req.body;
 
   try {

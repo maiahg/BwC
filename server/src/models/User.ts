@@ -8,11 +8,11 @@ const UserSchema = new mongoose.Schema({
     },
     given_name: {
         type: String,
-        required: true,
+        required: false,
     },
     family_name: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
@@ -21,11 +21,27 @@ const UserSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required: true,
+        required: false,
+    },
+    city: {
+        type: String,
+        required: false,
+    },
+    state: {
+        type: String,
+        required: false,
+    },
+    postalCode: {
+        type: String,
+        required: false,
     },
     dateOfBirth: {
         type: Date,
-        required: true,
+        required: false,
+    },
+    ssn: {
+        type: String,
+        required: false,
     },
     dwollaCustomerUrl: {
         type: String,
@@ -34,6 +50,12 @@ const UserSchema = new mongoose.Schema({
     dwollaCustomerId: {
         type: String,
         required: false,
+    },
+    accountStatus: {
+        type: String,
+        required: true,
+        enum: ["pending", "active", "inactive"],
+        default: "pending",
     },
 });
 

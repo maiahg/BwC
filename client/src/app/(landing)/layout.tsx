@@ -9,12 +9,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (authUser) {
-        router.push("/dashboard");
-    }
-  }, [authUser, router, pathname]);
-
 
   return (
     <div className="h-full w-full">

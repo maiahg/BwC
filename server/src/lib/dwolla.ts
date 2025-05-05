@@ -61,24 +61,37 @@ export const createDwollaCustomer = async ({
   firstName,
   lastName,
   email,
-  address,
+  address1,
+  city,
+  state,
+  postalCode,
   dateOfBirth,
+  ssn,
   type,
 }: {
   firstName: string;
   lastName: string;
   email: string;
-  address: string;
+  address1: string;
+  city: string;
+  state: string;
+  postalCode: string;
   dateOfBirth: string;
+  ssn: string;
   type: "personal" | "business";
 }) => {
   try {
+    console.log("address1", address1);
     const response = await dwollaClient.post("customers", {
       firstName,
       lastName,
       email,
-      address,
+      address1,
+      city,
+      state,
+      postalCode,
       dateOfBirth,
+      ssn,
       type,
     });
 
