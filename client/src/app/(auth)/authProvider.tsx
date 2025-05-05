@@ -85,43 +85,25 @@ const formFields = {
         },
     },
     signUp: {
-        given_name: {
-            order: 1,
-            isRequired: true,
-        },
-        family_name: {
-            order: 2,
-            isRequired: true,
-        },
         username: {
-          order: 3,
+          order: 1,
           placeholder: "Enter your email address",
           label: "Email",
           isRequired: true,
         },
-        address: {
-            order: 4,
-            placeholder: "Enter your address",
-            label: "Address",
-            isRequired: true,
-        },
-        birthdate: {
-            order: 5,
-            isRequired: true,
-        },
-        password: {
-          order: 6,
-          placeholder: "Create a password",
-          label: "Password",
-          isRequired: true,
-        },
-        confirm_password: {
-          order: 7,
-          placeholder: "Confirm your password",
-          label: "Confirm Password",
-          isRequired: true,
-        },
+      password: {
+        order: 2,
+        placeholder: "Create a password",
+        label: "Password",
+        isRequired: true,
       },
+      confirm_password: {
+        order: 3,
+        placeholder: "Confirm your password",
+        label: "Confirm Password",
+        isRequired: true,
+      },
+    },
 }
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
@@ -130,11 +112,12 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   const isAuthPage = pathname.match(/^\/(signin|signup)$/);
+  const isSignUpPage = pathname.match(/^\/signup$/);
 
   useEffect(() => {
     if (user && isAuthPage) {
-      if (route === "signUp") {
-        router.push("/link-account");
+      if (isSignUpPage) {
+        router.push("/add-info");
       } else {
         router.push("/dashboard");
       }
@@ -143,7 +126,7 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
 
   
   return (
-    <div className='min-h-screen flex items-center justify-center '>
+    <div className='min-h-screen flex items-center justify-center'>
         <Authenticator
         initialState={pathname.includes("signup") ? "signUp" : "signIn"}
         components={components}

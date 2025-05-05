@@ -16,11 +16,15 @@ declare global {
     cognitoId: string;
     given_name: string;
     family_name: string;
-    dwollaCustomerUrl: string;
-    dwollaCustomerId: string;
     email: string;
     address: string;
+    city: string;
+    state: string;
+    postalCode: string;
     dateOfBirth: string;
+    ssn: string;
+    dwollaCustomerUrl: string;
+    dwollaCustomerId: string;
   };
 
   type Account = {

@@ -1,4 +1,4 @@
-import { createNewUserInDatabase } from "@/lib/utils";
+import { createNewUserInDatabase, updateUserInDatabase } from "@/lib/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
@@ -50,16 +50,32 @@ export const api = createApi({
       },
     }),
 
-    createLinkToken: build.mutation<{ link_token: string }, { userInfo: UserInfo }>({
-      queryFn: async (userInfo , _queryApi, _extraoptions, fetchWithBQ) => {
+    updateUser: build.mutation<UserInfo, UserInfo>({
+      queryFn: async (userInfo, _queryApi, _extraoptions, fetchWithBQ) => {
+        try {
+          const user = await getCurrentUser();
+          const updateUserResponse = await updateUserInDatabase(
+            user.userId,
+            userInfo,
+            fetchWithBQ
+          );
+
+          return { data: updateUserResponse.data as UserInfo };
+        } catch (error: any) {
+          return { error: error.message || "Could not update user" };
+        }
+      },
+    }),
+    
+
+    createLinkToken: build.mutation<{ linkToken: string }, UserInfo>({
+      queryFn: async (userInfo, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
           const plaidLinkTokenResponse = await fetchWithBQ({
             url: "/plaid/create-link-token",
             method: "POST",
             body: {
               cognitoId: userInfo.cognitoId,
-              given_name: userInfo.given_name,
-              family_name: userInfo.family_name,
             },
           });
 
@@ -81,7 +97,7 @@ export const api = createApi({
           const plaidExchangeResponse = await fetchWithBQ({
             url: "/plaid/exchange-public-token",
             method: "POST",
-            body: {
+            body: {  
               _id,
               public_token,
             },
@@ -102,6 +118,7 @@ export const api = createApi({
 
 export const {
   useGetAuthUserQuery,
+  useUpdateUserMutation, 
   useCreateLinkTokenMutation,
   useExchangePublicTokenMutation,
 } = api;
