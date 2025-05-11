@@ -25,8 +25,9 @@ export const createLinkToken = async (req: Request, res: Response): Promise<void
       products: ['auth'] as Products[],
       country_codes: ['US'] as CountryCode[],
     });
-
+    
     res.json({ linkToken: response.data.link_token });
+
   } catch (err) {
     res.status(500).json({ error: "Could not create link token" });
   }
@@ -80,7 +81,7 @@ export const exchangePublicToken = async (req: Request, res: Response): Promise<
       bankId: itemId,
       accessToken,
       fundingSourceUrl,
-      shareableId: btoa(accountData.account_id),
+      sharableId: btoa(accountData.account_id),
     });
 
     try {
