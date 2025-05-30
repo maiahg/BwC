@@ -1,14 +1,13 @@
-"use client"
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import PlaidLink from '@/components/PlaidLink';
-import { useGetAuthUserQuery } from '@/state/api'
-
+import React from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import PlaidLink from "@/components/PlaidLink";
+import { useGetAuthUserQuery } from "@/state/api";
 
 const LinkAccount = () => {
-  const { data: authUser, isLoading, error} = useGetAuthUserQuery();
+  const { data: authUser, isLoading, error } = useGetAuthUserQuery();
   const router = useRouter();
 
   return (
@@ -22,7 +21,8 @@ const LinkAccount = () => {
       />
       <h1 className="text-2xl font-bold mb-4">Link Your Account</h1>
       <p className="mb-6 text-center">
-        Signed up successfully. Link your account to start banking with confidence.
+        Signed up successfully. Link your account to start banking with
+        confidence.
       </p>
       <PlaidLink user={authUser?.userInfo} variant="primary" />
     </div>

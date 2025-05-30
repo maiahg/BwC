@@ -7,10 +7,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const loggedIn = { name: "John Doe", email: "abc@gmail.com"};
+  const loggedIn = { name: "John Doe", email: "abc@gmail.com" };
   return (
     <main className="flex h-screen w-full font-inter">
-      <Sidebar user={loggedIn}/>
+      <Sidebar user={loggedIn} />
       <div className="flex size-full flex-col">
         <div className="root-layout">
           <Image src="/icons/logo.svg" width={30} height={30} alt="logo" />
@@ -22,4 +22,4 @@ export default function RootLayout({
       </div>
     </main>
   );
-} 
+}

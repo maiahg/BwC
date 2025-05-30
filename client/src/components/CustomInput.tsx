@@ -1,18 +1,18 @@
-import React from 'react'
-import { FormControl, FormField, FormLabel, FormMessage } from './ui/form'
-import { Input } from './ui/input'
+import React from "react";
+import { FormControl, FormField, FormLabel, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
 
-import { Control, FieldPath } from 'react-hook-form'
-import { z } from 'zod'
-import { infoFormSchema } from '@/lib/schemas'
+import { Control, FieldPath } from "react-hook-form";
+import { z } from "zod";
+import { infoFormSchema } from "@/lib/schemas";
 
-const formSchema = infoFormSchema()
+const formSchema = infoFormSchema();
 
 interface CustomInput {
-  control: Control<z.infer<typeof formSchema>>,
-  name: FieldPath<z.infer<typeof formSchema>>,
-  label: string,
-  placeholder: string
+  control: Control<z.infer<typeof formSchema>>;
+  name: FieldPath<z.infer<typeof formSchema>>;
+  label: string;
+  placeholder: string;
 }
 
 const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
@@ -22,15 +22,13 @@ const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
       name={name}
       render={({ field }) => (
         <div className="form-item">
-          <FormLabel className="form-label">
-            {label}
-          </FormLabel>
+          <FormLabel className="form-label">{label}</FormLabel>
           <div className="flex w-full flex-col">
             <FormControl>
-              <Input 
+              <Input
                 placeholder={placeholder}
                 className="input-class"
-                type={'text'}
+                type={"text"}
                 {...field}
               />
             </FormControl>
@@ -39,7 +37,7 @@ const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
         </div>
       )}
     />
-  )
-}
+  );
+};
 
-export default CustomInput
+export default CustomInput;

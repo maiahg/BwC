@@ -22,15 +22,15 @@ const dwollaClient = new Client({
 });
 
 export const createFundingSource = async ({
-    customerId,
-    fundingSourceName,
-    plaidToken,
-    _links,
+  customerId,
+  fundingSourceName,
+  plaidToken,
+  _links,
 }: {
-    customerId: string;
-    fundingSourceName: string;
-    plaidToken: string;
-    _links: object;
+  customerId: string;
+  fundingSourceName: string;
+  plaidToken: string;
+  _links: object;
 }) => {
   try {
     return await dwollaClient
@@ -55,7 +55,6 @@ export const createOnDemandAuthorization = async () => {
     console.error("Creating an On Demand Authorization Failed: ", err);
   }
 };
-
 
 export const createDwollaCustomer = async ({
   firstName,
@@ -102,26 +101,25 @@ export const createDwollaCustomer = async ({
 };
 
 export const addFundingSource = async ({
-    dwollaCustomerId,
-    processorToken,
-    bankName,
+  dwollaCustomerId,
+  processorToken,
+  bankName,
 }: {
-    dwollaCustomerId: string;
-    processorToken: string;
-    bankName: string;
+  dwollaCustomerId: string;
+  processorToken: string;
+  bankName: string;
 }) => {
-    try {
-        const dwollaAuthLinks = await createOnDemandAuthorization();
+  try {
+    const dwollaAuthLinks = await createOnDemandAuthorization();
 
-        const fundingSourceOptions = {
-            customerId: dwollaCustomerId,
-            fundingSourceName: bankName,
-            plaidToken: processorToken,
-            _links: dwollaAuthLinks,
-        };
-        return await createFundingSource(fundingSourceOptions);
-    } catch (error) {
-        console.error("Error adding funding source:", error);
-    }
+    const fundingSourceOptions = {
+      customerId: dwollaCustomerId,
+      fundingSourceName: bankName,
+      plaidToken: processorToken,
+      _links: dwollaAuthLinks,
+    };
+    return await createFundingSource(fundingSourceOptions);
+  } catch (error) {
+    console.error("Error adding funding source:", error);
+  }
 };
-

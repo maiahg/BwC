@@ -396,7 +396,7 @@
 
 /* Amplify UI Overrides */
 [data-amplify-authenticator] {
-  --amplify-components-button-primary-background-color: #0179FE;
+  --amplify-components-button-primary-background-color: #0179fe;
   --amplify-components-button-primary-hover-background-color: #0166d8;
   --amplify-components-button-border-radius: 0.5rem;
   --amplify-components-fieldcontrol-border-radius: 0.5rem;
@@ -432,7 +432,7 @@
   width: 100%;
   height: 2.75rem;
   margin-top: 1rem;
-  background-color: #0179FE !important;
+  background-color: #0179fe !important;
   color: hsl(210 40% 98%) !important;
   @apply font-medium;
   @apply text-sm;
@@ -448,7 +448,7 @@
 
 [data-amplify-authenticator] .amplify-field-group__control:focus-within {
   border-color: #0166d8 !important;
-  box-shadow: 0 0 0 1px #0166d8  !important;
+  box-shadow: 0 0 0 1px #0166d8 !important;
 }
 
 [data-amplify-authenticator] .amplify-label {

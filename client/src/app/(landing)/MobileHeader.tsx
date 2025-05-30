@@ -1,7 +1,12 @@
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { useRouter } from 'next/navigation'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const MobileHeader = ({}) => {
   const router = useRouter();
@@ -23,20 +28,27 @@ const MobileHeader = ({}) => {
           side="bottom"
           className="!w-screen !max-w-none !left-0 !top-0 !h-screen !rounded-none p-6 bg-white z-50"
         >
-        <DropdownMenuItem>
-        <Button variant="outline" className="w-full py-6 form-btn-secondary" onClick={() => router.push('/signin')}>
-            Sign In
-        </Button>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-        <Button className="w-full py-6 form-btn" onClick={() => router.push('/signup')}>
-            Sign Up
-          </Button>
-        </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Button
+              variant="outline"
+              className="w-full py-6 form-btn-secondary"
+              onClick={() => router.push("/signin")}
+            >
+              Sign In
+            </Button>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Button
+              className="w-full py-6 form-btn"
+              onClick={() => router.push("/signup")}
+            >
+              Sign Up
+            </Button>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </section>
-  )
-}
+  );
+};
 
-export default MobileHeader
+export default MobileHeader;

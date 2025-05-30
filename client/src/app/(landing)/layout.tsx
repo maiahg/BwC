@@ -9,12 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-
-  return (
-    <div className="h-full w-full">
-        {children}
-    </div>
-  );
+  return <div className="h-full w-full">{children}</div>;
 };
 
 export default Layout;

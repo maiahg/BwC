@@ -1,12 +1,12 @@
-import React from 'react'
-import Loading from '@/components/Loading'
+import React from "react";
+import Loading from "@/components/Loading";
 
 const SignIn = () => {
   return (
     <div>
       <Loading />
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
